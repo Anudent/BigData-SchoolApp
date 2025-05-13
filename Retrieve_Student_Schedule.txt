@@ -1,0 +1,35 @@
+
+import mysql.connector
+
+
+#establishing connection
+def establish_connection()
+	connection = mysql.connector.connect(user='Anubhavg',
+                                     password='233066539',
+                                     host='10.8.37.226',
+                                     database='SchoolDatabase')                      
+	return connection
+
+
+#the statement recieves a connection, opens a cursor, and closes both
+def execute_statement(connection, statement)
+	cursor = connection.cursor()
+	cursor.execute(query)
+	return cursor.fetchall()
+
+#constructs the query to be used 
+def create_student_schedule_query(student_id)
+	return "CALL SectionInfo(" + student_id + ");"
+
+
+output = execute_statement(establish_connection, create_student_schedule_query)
+
+for row in output:
+    print()
+    print("Period: " + row[2])
+    print("Room: " + row[3])
+    print("Teacher: " + row[0])
+    print("Course: " + row[1])
+
+
+
