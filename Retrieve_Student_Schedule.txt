@@ -2,10 +2,13 @@
 import mysql.connector
 
 
-#establishing connection
-def establish_connection()
-	connection = mysql.connector.connect(user='Anubhavg',
-                                     password='233066539',
+
+#establishing connection, with login parameters
+String username=anubhavg
+String password=11223232
+def establish_connection(username, password )
+	connection = mysql.connector.connect(user='username',
+                                     password='password',
                                      host='10.8.37.226',
                                      database='SchoolDatabase')                      
 	return connection
@@ -32,4 +35,26 @@ for row in output:
     print("Course: " + row[1])
 
 
+
+
+
+SQL 
+
+
+CREATE VIEW AllTeacherPeriods
+	SELECT Teachers.TeacherName,Teachers.TeacherID, Sections.Period, Sections.Room, Sections.SectionID, Courses.CourseName
+	FROM Sections
+	INNER JOIN (Teachers, Courses) ON (Sections.TeacherID = Teachers.TeachersID AND Sections.CourseID = Courses.CourseID)
+	GROUP BY Teachers.TeacherName, Teachers.TeacherID;
+
+
+
+
+Create Procedure TeacherSchedule( Teacher )
+	Select TeacherName, CourseName, Period, Room
+	From AllTeacherPeriods
+	Where Teacher = TeacherID
+	Order by Period;
+
+	
 
